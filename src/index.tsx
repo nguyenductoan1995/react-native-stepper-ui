@@ -127,10 +127,10 @@ const Stepper: FC<StepperProps> = (props) => {
         })} */}
         <FlatList 
          data={content || []}
-         renderItems={({index: i})=>{
+         renderItems={({index})=>{
           return (
-            <React.Fragment key={i}>
-              {i !== 0 && (
+            <React.Fragment key={index}>
+              {index !== 0 && (
                 <View
                   style={{
                     flex: 1,
@@ -150,12 +150,12 @@ const Stepper: FC<StepperProps> = (props) => {
                     borderRadius: 30,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    opacity: search(i, step) ? 1 : 0.3,
+                    opacity: search(index, step) ? 1 : 0.3,
                   },
                   stepStyle,
                 ]}
               >
-                {search(i, step) ? (
+                {search(index, step) ? (
                   <Text
                     style={[
                       {
@@ -175,7 +175,7 @@ const Stepper: FC<StepperProps> = (props) => {
                       stepTextStyle,
                     ]}
                   >
-                    {i + 1}
+                    {index + 1}
                   </Text>
                 )}
               </View>
