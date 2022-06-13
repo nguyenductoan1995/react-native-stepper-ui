@@ -127,7 +127,7 @@ const Stepper: FC<StepperProps> = (props) => {
         })} */}
         <FlatList 
         horizontal
-        showsHorizontalScrollbar={false}
+        showsVerticalScrollIndicator={false}
          data={content || []}
          renderItem={({index}: {index: any})=>{
           return (
