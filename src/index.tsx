@@ -126,6 +126,7 @@ const Stepper: FC<StepperProps> = (props) => {
           );
         })} */}
         <FlatList 
+        horizontal
          data={content || []}
          renderItem={({index}: {index: any})=>{
           return (
