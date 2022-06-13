@@ -127,7 +127,7 @@ const Stepper: FC<StepperProps> = (props) => {
         })} */}
         <FlatList 
          data={content || []}
-         renderItems={({index})=>{
+         renderItems={({index}: {index: any})=>{
           return (
             <React.Fragment key={index}>
               {index !== 0 && (
