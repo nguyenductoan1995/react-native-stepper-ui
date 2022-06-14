@@ -1,4 +1,4 @@
-import React, { FC, useState, ReactElement, useEffect } from 'react';
+import React, { FC, useState, ReactElement, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -42,6 +42,7 @@ const Stepper: FC<StepperProps> = (props) => {
     showButton = true,
   } = props;
   const [step, setStep] = useState<number[]>([0]);
+  const listRef = useRef()
   const pushData = (val: number) => {
     setStep((prev) => [...prev, val]);
   };
@@ -126,10 +127,11 @@ const Stepper: FC<StepperProps> = (props) => {
           );
         })} */}
         <FlatList 
+        ref={listRef}
         horizontal
         showsVerticalScrollIndicator={false}
-         data={content || []}
-         renderItem={({index}: {index: any})=>{
+        data={content || []}
+        renderItem={({index}: {index: any})=>{
           return (
             <React.Fragment key={index}>
               {index !== 0 && (
