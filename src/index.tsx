@@ -21,6 +21,7 @@ export interface StepperProps {
   buttonStyle?: ViewStyle;
   buttonTextStyle?: TextStyle;
   showButton?: boolean;
+  activeView: ReactElement;
 }
 
 const search = (keyName: number, myArray: number[]): boolean => {
@@ -46,6 +47,7 @@ const Stepper: FC<StepperProps> = (props) => {
     buttonStyle,
     buttonTextStyle,
     showButton = true,
+    activeView
   } = props;
   const [step, setStep] = useState<number[]>([0]);
   const listRef = useRef<any>();
@@ -86,11 +88,11 @@ const Stepper: FC<StepperProps> = (props) => {
         }}>
         <FlatList 
          showsHorizontalScrollIndicator={false}
-        ref={listRef}
-        horizontal
-        showsVerticalScrollIndicator={false}
-        data={content || []}
-        renderItem={({index}: {index: any})=>{
+         ref={listRef}
+         horizontal
+         showsVerticalScrollIndicator={false}
+         data={content || []}
+         renderItem={({index}: {index: any})=>{
           return (
             <React.Fragment key={index}>
               {index !== 0 && (
@@ -146,7 +148,7 @@ const Stepper: FC<StepperProps> = (props) => {
         />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {content[active]}
+        {activeView}
       </ScrollView>
       {showButton && (
         <View
