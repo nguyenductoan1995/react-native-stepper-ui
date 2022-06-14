@@ -76,6 +76,7 @@ const Stepper: FC<StepperProps> = (props) => {
           alignItems: 'center',
         }}>
         <FlatList 
+         showsHorizontalScrollIndicator={false}
         ref={listRef}
         horizontal
         showsVerticalScrollIndicator={false}
