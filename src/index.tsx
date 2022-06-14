@@ -60,6 +60,7 @@ const Stepper: FC<StepperProps> = (props) => {
     } else {
       pushData(active);
     }
+    listRef?.current?.scrollToIndex({active})
   }, [active]);
 
   return (
