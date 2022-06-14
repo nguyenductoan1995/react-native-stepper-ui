@@ -1,4 +1,4 @@
-import React, {FC, useState, ReactElement} from 'react';
+import React, {FC, useState, ReactElement, useRef,useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   ViewStyle,
   TextStyle,
   ScrollView,
+  FlatList
 } from 'react-native';
 
 export interface StepperProps {
@@ -47,6 +48,12 @@ const Stepper: FC<StepperProps> = (props) => {
     showButton = true,
   } = props;
   const [step, setStep] = useState<number[]>([0]);
+  const listRef = useRef<any>();
+
+  useEffect(() => {
+    listRef?.current?.scrollToIndex({index:active})
+  }, [active]);
+
   const pushData = (val: number) => {
     setStep((prev) => [...prev, val]);
   };
@@ -57,6 +64,9 @@ const Stepper: FC<StepperProps> = (props) => {
       return prev;
     });
   };
+
+
+
   return (
     <View style={wrapperStyle}>
       <View
@@ -65,7 +75,7 @@ const Stepper: FC<StepperProps> = (props) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        {content.map((_, i) => {
+        {/* {content.map((_, i) => {
           return (
             <React.Fragment key={i}>
               {i !== 0 && (
@@ -116,7 +126,69 @@ const Stepper: FC<StepperProps> = (props) => {
               </View>
             </React.Fragment>
           );
-        })}
+        })} */}
+        <FlatList 
+        ref={listRef}
+        horizontal
+        showsVerticalScrollIndicator={false}
+        data={content || []}
+        renderItem={({index}: {index: any})=>{
+          return (
+            <React.Fragment key={index}>
+              {index !== 0 && (
+                <View
+                  style={{
+                    height: 1,
+                    width: 40,
+                    backgroundColor: 'grey',
+                    opacity: 1,
+                    marginHorizontal: 5,
+                    alignSelf: 'center'
+                  }}
+                />
+              )}
+              <View
+                style={[
+                  {
+                    backgroundColor: '#1976d2',
+                    width: 30,
+                    height: 30,
+                    borderRadius: 30,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    opacity: search(index, step) ? 1 : 0.3,
+                  },
+                  stepStyle,
+                ]}
+              >
+                {search(index, step) ? (
+                  <Text
+                    style={[
+                      {
+                        color: 'white',
+                      },
+                      stepTextStyle,
+                    ]}
+                  >
+                    &#10003;
+                  </Text>
+                ) : (
+                  <Text
+                    style={[
+                      {
+                        color: 'white',
+                      },
+                      stepTextStyle,
+                    ]}
+                  >
+                    {index + 1}
+                  </Text>
+                )}
+              </View>
+            </React.Fragment>
+          );
+         }}
+        />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {content[active]}
