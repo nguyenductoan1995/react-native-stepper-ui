@@ -142,7 +142,7 @@ const Stepper: FC<StepperProps> = (props) => {
                     height: 1,
                     backgroundColor: 'grey',
                     opacity: 1,
-                    marginHorizontal: 0,
+                    marginHorizontal: 10,
                   }}
                 />
               )}
