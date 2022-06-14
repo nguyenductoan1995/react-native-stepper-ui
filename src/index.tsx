@@ -75,58 +75,6 @@ const Stepper: FC<StepperProps> = (props) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        {/* {content.map((_, i) => {
-          return (
-            <React.Fragment key={i}>
-              {i !== 0 && (
-                <View
-                  style={{
-                    flex: 1,
-                    height: 1,
-                    backgroundColor: 'grey',
-                    opacity: 1,
-                    marginHorizontal: 10,
-                  }}
-                />
-              )}
-              <View
-                style={[
-                  {
-                    backgroundColor: '#1976d2',
-                    width: 30,
-                    height: 30,
-                    borderRadius: 30,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    opacity: search(i, step) ? 1 : 0.3,
-                  },
-                  stepStyle,
-                ]}>
-                {search(i, step) ? (
-                  <Text
-                    style={[
-                      {
-                        color: 'white',
-                      },
-                      stepTextStyle,
-                    ]}>
-                    &#10003;
-                  </Text>
-                ) : (
-                  <Text
-                    style={[
-                      {
-                        color: 'white',
-                      },
-                      stepTextStyle,
-                    ]}>
-                    {i + 1}
-                  </Text>
-                )}
-              </View>
-            </React.Fragment>
-          );
-        })} */}
         <FlatList 
         ref={listRef}
         horizontal
@@ -138,11 +86,12 @@ const Stepper: FC<StepperProps> = (props) => {
               {index !== 0 && (
                 <View
                   style={{
-                    flex: 1,
+                    width: 30,
                     height: 1,
                     backgroundColor: 'grey',
                     opacity: 1,
                     marginHorizontal: 10,
+                    alignSelf: 'center'
                   }}
                 />
               )}
