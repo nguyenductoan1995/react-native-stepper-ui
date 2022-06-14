@@ -21,7 +21,7 @@ export interface StepperProps {
   buttonStyle?: ViewStyle;
   buttonTextStyle?: TextStyle;
   showButton?: boolean;
-  activeView: ReactElement;
+  activeView?: ReactElement;
 }
 
 const search = (keyName: number, myArray: number[]): boolean => {

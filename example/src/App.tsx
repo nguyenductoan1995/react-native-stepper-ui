@@ -22,7 +22,6 @@ const App = () => {
   return (
     <View style={{ marginVertical: 80, marginHorizontal: 20 }}>
       <Stepper
-      activeView={null}
         active={active}
         content={content}
         onBack={() => setActive((p) => p - 1)}
