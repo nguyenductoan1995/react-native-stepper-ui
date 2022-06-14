@@ -138,12 +138,11 @@ const Stepper: FC<StepperProps> = (props) => {
               {index !== 0 && (
                 <View
                   style={{
+                    flex: 1,
                     height: 1,
-                    width: 40,
                     backgroundColor: 'grey',
                     opacity: 1,
-                    marginHorizontal: 5,
-                    alignSelf: 'center'
+                    marginHorizontal: 10,
                   }}
                 />
               )}
@@ -159,8 +158,7 @@ const Stepper: FC<StepperProps> = (props) => {
                     opacity: search(index, step) ? 1 : 0.3,
                   },
                   stepStyle,
-                ]}
-              >
+                ]}>
                 {search(index, step) ? (
                   <Text
                     style={[
@@ -168,8 +166,7 @@ const Stepper: FC<StepperProps> = (props) => {
                         color: 'white',
                       },
                       stepTextStyle,
-                    ]}
-                  >
+                    ]}>
                     &#10003;
                   </Text>
                 ) : (
@@ -179,8 +176,7 @@ const Stepper: FC<StepperProps> = (props) => {
                         color: 'white',
                       },
                       stepTextStyle,
-                    ]}
-                  >
+                    ]}>
                     {index + 1}
                   </Text>
                 )}
