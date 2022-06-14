@@ -42,7 +42,7 @@ const Stepper: FC<StepperProps> = (props) => {
     showButton = true,
   } = props;
   const [step, setStep] = useState<number[]>([0]);
-  const listRef = useRef()
+  const listRef = useRef<null>()
   const pushData = (val: number) => {
     setStep((prev) => [...prev, val]);
   };
