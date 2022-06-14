@@ -49,8 +49,17 @@ const Stepper: FC<StepperProps> = (props) => {
   } = props;
   const [step, setStep] = useState<number[]>([0]);
   const listRef = useRef<any>();
+  const [act, setAct] = useState<number>(active)
 
   useEffect(() => {
+    if(act !== active){
+      setAct(active)
+      if (step[step.length - 1] > active) {
+        removeData();
+      } else {
+         pushData(act+1);
+      }
+    }
     listRef?.current?.scrollToIndex({index:active})
   }, [active]);
 
@@ -159,7 +168,6 @@ const Stepper: FC<StepperProps> = (props) => {
                 },
               ]}
               onPress={() => {
-                removeData();
                 onBack();
               }}>
               <Text style={[{color: 'white'}, buttonTextStyle]}>Back</Text>
@@ -178,7 +186,6 @@ const Stepper: FC<StepperProps> = (props) => {
                 buttonStyle,
               ]}
               onPress={() => {
-                pushData(active + 1);
                 onNext();
               }}>
               <Text style={[{color: 'white'}, buttonTextStyle]}>Next</Text>
