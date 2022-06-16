@@ -62,7 +62,12 @@ const Stepper: FC<StepperProps> = (props) => {
          pushData(act+1);
       }
     }
-    listRef?.current?.scrollToIndex({index:active})
+    try {
+      listRef?.current?.scrollToIndex({index:active})
+    } catch (error) {
+      
+    }
+    
   }, [active]);
 
   const pushData = (val: number) => {
