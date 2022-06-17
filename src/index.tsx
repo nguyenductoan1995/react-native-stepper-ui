@@ -13,7 +13,6 @@ export interface StepperProps {
   active: number;
   content: ReactElement[];
   onNext: Function;
-  onBack?: Function;
   onFinish: Function;
   wrapperStyle?: ViewStyle;
   stepStyle?: ViewStyle;
@@ -38,7 +37,6 @@ const Stepper: FC<StepperProps> = (props) => {
   const {
     active,
     content,
-    onBack,
     onNext,
     onFinish,
     wrapperStyle,
