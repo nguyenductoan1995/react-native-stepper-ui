@@ -210,7 +210,7 @@ const Stepper: FC<StepperProps> = (props) => {
               onPress={() => {
                 onNext();
               }}>
-              <Text style={[{color: 'white'}, buttonTextStyle]}>Next</Text>
+              <Text style={[{color: 'white'}, buttonTextStyle]}>Save</Text>
             </TouchableOpacity>
           )}
           {content.length - 1 === active && (
