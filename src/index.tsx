@@ -53,7 +53,17 @@ const Stepper: FC<StepperProps> = (props) => {
   const listRef = useRef<any>();
   const [act, setAct] = useState<number>(active)
 
-  useEffect(() => {
+  useEffect(()=>{
+    if(active > step[step.length - 1]){
+      let actived = []
+      for (let i = 1; i <= active; i++) {
+        actived.push(i)
+      }
+      setStep([...step,...actived,])
+    }
+  },[])
+
+  useEffect(() => { 
     if(act !== active){
       setAct(active)
       if (step[step.length - 1] > active) {
@@ -67,7 +77,6 @@ const Stepper: FC<StepperProps> = (props) => {
     } catch (error) {
       
     }
-    
   }, [active]);
 
   const pushData = (val: number) => {
@@ -92,6 +101,9 @@ const Stepper: FC<StepperProps> = (props) => {
           alignItems: 'center',
         }}>
         <FlatList 
+        getItemLayout={(data, index) => (
+          {length: 48, offset: 48 * index, index}
+        )}
          showsHorizontalScrollIndicator={false}
          ref={listRef}
          horizontal
