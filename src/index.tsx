@@ -101,7 +101,7 @@ const Stepper: FC<StepperProps> = (props) => {
           alignItems: 'center',
         }}>
         <FlatList 
-        getItemLayout={(data, index) => (
+        getItemLayout={(_:any, index:number) => (
           {length: 48, offset: 48 * index, index}
         )}
          showsHorizontalScrollIndicator={false}
