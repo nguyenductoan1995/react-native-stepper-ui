@@ -13,6 +13,7 @@ export interface StepperProps {
   active: number;
   content: ReactElement[];
   onNext: Function;
+  onBack: Function;
   onFinish: Function;
   wrapperStyle?: ViewStyle;
   stepStyle?: ViewStyle;
@@ -37,6 +38,7 @@ const Stepper: FC<StepperProps> = (props) => {
   const {
     active,
     content,
+    onBack,
     onNext,
     onFinish,
     wrapperStyle,
@@ -173,7 +175,7 @@ const Stepper: FC<StepperProps> = (props) => {
           style={{
             flexDirection: 'row',
           }}>
-          {/* {active !== 0 && (
+          {active === -1 && (
             <TouchableOpacity
               style={[
                 {
@@ -192,7 +194,7 @@ const Stepper: FC<StepperProps> = (props) => {
               }}>
               <Text style={[{color: 'white'}, buttonTextStyle]}>Back</Text>
             </TouchableOpacity>
-          )} */}
+          )}
           {content.length - 1 !== active && (
             <TouchableOpacity
               style={[
@@ -208,7 +210,7 @@ const Stepper: FC<StepperProps> = (props) => {
               onPress={() => {
                 onNext();
               }}>
-              <Text style={[{color: 'white'}, buttonTextStyle]}>Save</Text>
+              <Text style={[{color: 'white'}, buttonTextStyle]}>Next</Text>
             </TouchableOpacity>
           )}
           {content.length - 1 === active && (
