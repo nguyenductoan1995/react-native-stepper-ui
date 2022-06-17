@@ -175,7 +175,7 @@ const Stepper: FC<StepperProps> = (props) => {
           style={{
             flexDirection: 'row',
           }}>
-          {active !== 0 && (
+          {/* {active !== 0 && (
             <TouchableOpacity
               style={[
                 {
@@ -194,7 +194,7 @@ const Stepper: FC<StepperProps> = (props) => {
               }}>
               <Text style={[{color: 'white'}, buttonTextStyle]}>Back</Text>
             </TouchableOpacity>
-          )}
+          )} */}
           {content.length - 1 !== active && (
             <TouchableOpacity
               style={[
