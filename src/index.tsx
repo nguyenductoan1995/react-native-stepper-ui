@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ViewStyle,
   TextStyle,
-  ScrollView,
+  // ScrollView,
   FlatList
 } from 'react-native';
 
@@ -167,9 +167,9 @@ const Stepper: FC<StepperProps> = (props) => {
          }}
         />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
         {activeView}
-      </ScrollView>
+      {/* </ScrollView> */}
       {showButton && (
         <View
           style={{
