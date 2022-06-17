@@ -54,21 +54,22 @@ const Stepper: FC<StepperProps> = (props) => {
   const [act, setAct] = useState<number>(active)
 
   useEffect(()=>{
-    if(active > step[step.length - 1]){
+    if(active > step[step.length - 1] && step.length===1){
       let actived = []
-      for (let i = 1; i <= active; i++) {
+      for (let i = 0; i <= active; i++) {
         actived.push(i)
       }
-      setStep([...step,...actived,])
+      setStep([...actived,])
     }
-  },[])
+  },[active])
 
-  useEffect(() => { 
+  useEffect(() => {  
     if(act !== active){
       setAct(active)
       if (step[step.length - 1] > active) {
         removeData();
-      } else {
+      } else if(active -act ===1) {
+        
          pushData(act+1);
       }
     }
@@ -80,7 +81,9 @@ const Stepper: FC<StepperProps> = (props) => {
   }, [active]);
 
   const pushData = (val: number) => {
-    setStep((prev) => [...prev, val]);
+    if(!step.find(e=>e ===val)){
+      setStep((prev) => [...prev, val]);
+    } 
   };
 
   const removeData = () => {
