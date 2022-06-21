@@ -175,7 +175,7 @@ const Stepper: FC<StepperProps> = (props) => {
           style={{
             flexDirection: 'row',
           }}>
-          {active === -1 && (
+          {active  > 0 && (
             <TouchableOpacity
               style={[
                 {
