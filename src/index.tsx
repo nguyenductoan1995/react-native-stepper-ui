@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ViewStyle,
   TextStyle,
-  // ScrollView,
+   ScrollView,
   FlatList
 } from 'react-native';
 
@@ -112,6 +112,7 @@ const Stepper: FC<StepperProps> = (props) => {
          horizontal
          showsVerticalScrollIndicator={false}
          data={content || []}
+         style={{paddingBottom: 10}}
          renderItem={({index}: {index: any})=>{
           return (
             <React.Fragment key={index}>
@@ -167,19 +168,20 @@ const Stepper: FC<StepperProps> = (props) => {
          }}
         />
       </View>
-      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+      <ScrollView showsVerticalScrollIndicator={false}>
         {activeView}
-      {/* </ScrollView> */}
+      </ScrollView>
       {showButton && (
         <View
           style={{
             flexDirection: 'row',
+            paddingTop: 10
           }}>
           {active  > 0 && (
             <TouchableOpacity
               style={[
                 {
-                  padding: 10,
+                  paddingHorizontal: 10,
                   borderRadius: 4,
                   alignSelf: 'flex-start',
                   marginRight: 10,
