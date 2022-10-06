@@ -168,14 +168,15 @@ const Stepper: FC<StepperProps> = (props) => {
          }}
         />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} >
         {activeView}
       </ScrollView>
       {showButton && (
         <View
           style={{
             flexDirection: 'row',
-            paddingTop: 10
+            paddingTop:10,
+            paddingBottom:20
           }}>
           {active  > 0 && (
             <TouchableOpacity
