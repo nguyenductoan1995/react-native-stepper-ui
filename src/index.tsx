@@ -1,12 +1,12 @@
-import React, {FC, useState, ReactElement, useRef,useEffect} from 'react';
+import React, { FC, useState, ReactElement, useRef, useEffect } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   ViewStyle,
   TextStyle,
-   ScrollView,
-  FlatList
+  ScrollView,
+  FlatList,
 } from 'react-native';
 
 export interface StepperProps {
@@ -22,6 +22,7 @@ export interface StepperProps {
   buttonTextStyle?: TextStyle;
   showButton?: boolean;
   activeView?: ReactElement;
+  haveBackOnly?: boolean;
 }
 
 const search = (keyName: number, myArray: number[]): boolean => {
@@ -47,43 +48,43 @@ const Stepper: FC<StepperProps> = (props) => {
     buttonStyle,
     buttonTextStyle,
     showButton = true,
-    activeView
+    haveBackOnly = false,
+    activeView,
   } = props;
   const [step, setStep] = useState<number[]>([0]);
   const listRef = useRef<any>();
-  const [act, setAct] = useState<number>(active)
+  const [act, setAct] = useState<number>(active);
 
-  useEffect(()=>{
-    if(active > step[step.length - 1] && step.length===1){
-      let actived = []
+  useEffect(() => {
+    if (active > step[step.length - 1] && step.length === 1) {
+      let actived = [];
       for (let i = 0; i <= active; i++) {
-        actived.push(i)
+        actived.push(i);
       }
-      setStep([...actived,])
+      setStep([...actived]);
     }
-  },[active])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, step]);
 
-  useEffect(() => {  
-    if(act !== active){
-      setAct(active)
+  useEffect(() => {
+    if (act !== active) {
+      setAct(active);
       if (step[step.length - 1] > active) {
         removeData();
-      } else if(active -act ===1) {
-        
-         pushData(act+1);
+      } else if (active - act === 1) {
+        pushData(act + 1);
       }
     }
     try {
-      listRef?.current?.scrollToIndex({index:active})
-    } catch (error) {
-      
-    }
-  }, [active]);
+      listRef?.current?.scrollToIndex({ index: active });
+    } catch (error) {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, step, act]);
 
   const pushData = (val: number) => {
-    if(!step.find(e=>e ===val)){
+    if (!step.find((e) => e === val)) {
       setStep((prev) => [...prev, val]);
-    } 
+    }
   };
 
   const removeData = () => {
@@ -93,8 +94,6 @@ const Stepper: FC<StepperProps> = (props) => {
     });
   };
 
-
-
   return (
     <View style={wrapperStyle}>
       <View
@@ -102,83 +101,88 @@ const Stepper: FC<StepperProps> = (props) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-        }}>
-        <FlatList 
-        getItemLayout={(_:any, index:number) => (
-          {length: 48, offset: 48 * index, index}
-        )}
-         showsHorizontalScrollIndicator={false}
-         ref={listRef}
-         horizontal
-         showsVerticalScrollIndicator={false}
-         data={content || []}
-         style={{paddingBottom: 10}}
-         renderItem={({index}: {index: any})=>{
-          return (
-            <React.Fragment key={index}>
-              {index !== 0 && (
-                <View
-                  style={{
-                    width: 30,
-                    height: 1,
-                    backgroundColor: 'grey',
-                    opacity: 1,
-                    marginHorizontal: 5,
-                    alignSelf: 'center'
-                  }}
-                />
-              )}
-              <View
-                style={[
-                  {
-                    backgroundColor: '#1976d2',
-                    width: 30,
-                    height: 30,
-                    borderRadius: 30,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    opacity: search(index, step) ? 1 : 0.3,
-                  },
-                  stepStyle,
-                ]}>
-                {search(index, step) ? (
-                  <Text
-                    style={[
-                      {
-                        color: 'white',
-                      },
-                      stepTextStyle,
-                    ]}>
-                    &#10003;
-                  </Text>
-                ) : (
-                  <Text
-                    style={[
-                      {
-                        color: 'white',
-                      },
-                      stepTextStyle,
-                    ]}>
-                    {index + 1}
-                  </Text>
+        }}
+      >
+        <FlatList
+          getItemLayout={(_: any, index: number) => ({
+            length: 48,
+            offset: 48 * index,
+            index,
+          })}
+          showsHorizontalScrollIndicator={false}
+          ref={listRef}
+          horizontal
+          showsVerticalScrollIndicator={false}
+          data={content || []}
+          style={{ paddingBottom: 10 }}
+          renderItem={({ index }: { index: any }) => {
+            return (
+              <React.Fragment key={index}>
+                {index !== 0 && (
+                  <View
+                    style={{
+                      width: 30,
+                      height: 1,
+                      backgroundColor: 'grey',
+                      opacity: 1,
+                      marginHorizontal: 5,
+                      alignSelf: 'center',
+                    }}
+                  />
                 )}
-              </View>
-            </React.Fragment>
-          );
-         }}
+                <View
+                  style={[
+                    {
+                      backgroundColor: '#1976d2',
+                      width: 30,
+                      height: 30,
+                      borderRadius: 30,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      opacity: search(index, step) ? 1 : 0.3,
+                    },
+                    stepStyle,
+                  ]}
+                >
+                  {search(index, step) ? (
+                    <Text
+                      style={[
+                        {
+                          color: 'white',
+                        },
+                        stepTextStyle,
+                      ]}
+                    >
+                      &#10003;
+                    </Text>
+                  ) : (
+                    <Text
+                      style={[
+                        {
+                          color: 'white',
+                        },
+                        stepTextStyle,
+                      ]}
+                    >
+                      {index + 1}
+                    </Text>
+                  )}
+                </View>
+              </React.Fragment>
+            );
+          }}
         />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} >
-        {activeView}
-      </ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>{activeView}</ScrollView>
       {showButton && (
         <View
           style={{
             flexDirection: 'row',
-            paddingTop:10,
-            paddingBottom:20
-          }}>
-          {active  > 0 && (
+            paddingTop: 10,
+            paddingBottom: 20,
+          }}
+        >
+          {active > 0 && (
             <TouchableOpacity
               style={[
                 {
@@ -194,11 +198,12 @@ const Stepper: FC<StepperProps> = (props) => {
               ]}
               onPress={() => {
                 onBack();
-              }}>
-              <Text style={[{color: 'white'}, buttonTextStyle]}>Back</Text>
+              }}
+            >
+              <Text style={[{ color: 'white' }, buttonTextStyle]}>Back</Text>
             </TouchableOpacity>
           )}
-          {content.length - 1 !== active && (
+          {!haveBackOnly && content.length - 1 !== active && (
             <TouchableOpacity
               style={[
                 {
@@ -212,11 +217,12 @@ const Stepper: FC<StepperProps> = (props) => {
               ]}
               onPress={() => {
                 onNext();
-              }}>
-              <Text style={[{color: 'white'}, buttonTextStyle]}>Save</Text>
+              }}
+            >
+              <Text style={[{ color: 'white' }, buttonTextStyle]}>Save</Text>
             </TouchableOpacity>
           )}
-          {content.length - 1 === active && (
+          {!haveBackOnly && content.length - 1 === active && (
             <TouchableOpacity
               style={[
                 {
@@ -227,8 +233,9 @@ const Stepper: FC<StepperProps> = (props) => {
                 },
                 buttonStyle,
               ]}
-              onPress={() => onFinish()}>
-              <Text style={[{color: 'white'}, buttonTextStyle]}>Finish</Text>
+              onPress={() => onFinish()}
+            >
+              <Text style={[{ color: 'white' }, buttonTextStyle]}>Finish</Text>
             </TouchableOpacity>
           )}
         </View>
